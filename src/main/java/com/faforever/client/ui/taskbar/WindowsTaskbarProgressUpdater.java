@@ -29,7 +29,6 @@ import java.util.concurrent.Executor;
  */
 @Slf4j
 @Component
-@Profile(FafClientApplication.PROFILE_WINDOWS)
 @RequiredArgsConstructor
 @ConditionalOnBean(OsWindows.class)
 public class WindowsTaskbarProgressUpdater implements InitializingBean {
