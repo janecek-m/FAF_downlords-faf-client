@@ -17,6 +17,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -29,17 +30,19 @@ import java.nio.file.Path;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-@ConditionalOnMissingBean(OsMac.class)
 public class FileOpeningHandler implements ApplicationRunner, InitializingBean {
 
   private final ReplayService replayService;
   private final NotificationService notificationService;
   private final LoginService loginService;
+  private final OperatingSystem operatingSystem;
 
   @Override
   public void afterPropertiesSet() {
     log.debug("Registering file opening handler: {}", this.getClass().getName());
-    StartupNotification.registerStartupListener(this::onStartup);
+    if (!(operatingSystem instanceof OsMac)) {
+      StartupNotification.registerStartupListener(this::onStartup);
+    }
   }
 
   private void onStartup(String parameters) {
