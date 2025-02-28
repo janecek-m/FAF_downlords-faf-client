@@ -1,9 +1,11 @@
 package com.faforever.client.discord;
 
 import com.faforever.client.fx.PlatformService;
+import com.faforever.client.os.OsPosix.OsMac;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;

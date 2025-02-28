@@ -3,6 +3,7 @@ package com.faforever.client.os;
 import com.faforever.client.fx.JavaFxUtil;
 import com.faforever.client.net.ConnectionState;
 import com.faforever.client.notification.NotificationService;
+import com.faforever.client.os.OsPosix.OsMac;
 import com.faforever.client.replay.ReplayService;
 import com.faforever.client.user.LoginService;
 import com.install4j.api.launcher.StartupNotification;
@@ -14,6 +15,8 @@ import org.apache.commons.compress.compressors.CompressorException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -26,6 +29,7 @@ import java.nio.file.Path;
 @Component
 @Slf4j
 @RequiredArgsConstructor
+@ConditionalOnMissingBean(OsMac.class)
 public class FileOpeningHandler implements ApplicationRunner, InitializingBean {
 
   private final ReplayService replayService;

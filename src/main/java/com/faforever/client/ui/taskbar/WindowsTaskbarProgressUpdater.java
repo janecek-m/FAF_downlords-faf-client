@@ -3,6 +3,7 @@ package com.faforever.client.ui.taskbar;
 import com.faforever.client.FafClientApplication;
 import com.faforever.client.fx.JavaFxUtil;
 import com.faforever.client.fx.SimpleChangeListener;
+import com.faforever.client.os.OsWindows;
 import com.faforever.client.task.TaskService;
 import javafx.beans.Observable;
 import javafx.beans.value.WeakChangeListener;
@@ -16,6 +17,7 @@ import org.bridj.cpp.com.COMRuntime;
 import org.bridj.cpp.com.shell.ITaskbarList3;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +31,7 @@ import java.util.concurrent.Executor;
 @Component
 @Profile(FafClientApplication.PROFILE_WINDOWS)
 @RequiredArgsConstructor
+@ConditionalOnBean(OsWindows.class)
 public class WindowsTaskbarProgressUpdater implements InitializingBean {
 
   private final TaskService taskService;

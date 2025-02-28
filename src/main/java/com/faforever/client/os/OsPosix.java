@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.Objects;
 
 @Slf4j
-public final class OsPosix implements OperatingSystem {
+public sealed class OsPosix implements OperatingSystem {
   private static final String USER_HOME_SUB_FOLDER = ".faforever";
 
   @Override
@@ -75,5 +75,8 @@ public final class OsPosix implements OperatingSystem {
   public void increaseProcessPriority(Process process) {
     log.debug("Increasing process priority is not implemented for Posix. Ignoring request.");
   }
+
+  public static final class OsLinux extends OsPosix {}
+  public static final class OsMac extends OsPosix {}
 
 }

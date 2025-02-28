@@ -4,6 +4,7 @@ import com.faforever.client.domain.server.GameInfo;
 import com.faforever.client.game.GameRunner;
 import com.faforever.client.game.GameService;
 import com.faforever.client.notification.NotificationService;
+import com.faforever.client.os.OsPosix.OsMac;
 import com.faforever.client.preferences.Preferences;
 import com.faforever.client.replay.ReplayRunner;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,10 +13,12 @@ import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRPC.DiscordReply;
 import net.arikia.dev.drpc.DiscordUser;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
+@ConditionalOnMissingBean(OsMac.class)
 public class DiscordEventHandler extends DiscordEventHandlers {
   private final NotificationService notificationService;
   private final GameRunner gameRunner;

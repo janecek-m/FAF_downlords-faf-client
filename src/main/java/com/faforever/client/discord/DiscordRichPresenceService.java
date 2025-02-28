@@ -3,6 +3,7 @@ package com.faforever.client.discord;
 import com.faforever.client.config.ClientProperties;
 import com.faforever.client.domain.server.GameInfo;
 import com.faforever.client.game.GameRunner;
+import com.faforever.client.os.OsPosix.OsMac;
 import com.faforever.client.player.PlayerService;
 import com.faforever.client.preferences.Preferences;
 import com.faforever.commons.lobby.GameStatus;
@@ -14,6 +15,7 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 import net.arikia.dev.drpc.DiscordRichPresence.Builder;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -25,6 +27,7 @@ import java.util.TimerTask;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@ConditionalOnMissingBean(OsMac.class)
 public class DiscordRichPresenceService implements DisposableBean, InitializingBean {
   private static final String HOSTING = "Hosting";
   private static final String WAITING = "Waiting";
