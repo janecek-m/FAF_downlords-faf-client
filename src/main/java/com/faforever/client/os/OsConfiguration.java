@@ -22,13 +22,13 @@ public class OsConfiguration {
   @Profile(FafClientApplication.PROFILE_LINUX)
   @Bean
   public OperatingSystem linux() {
-    return new OsPosix();
+    return new OsLinux();
   }
 
   @Profile(FafClientApplication.PROFILE_MAC)
   @Bean
   public OperatingSystem macos() {
-    return new OsPosix();
+    return new OsMac();
   }
 
   @Bean
