@@ -1,9 +1,10 @@
 package com.faforever.client.os;
 
 import com.faforever.client.FafClientApplication;
-import com.faforever.client.os.OsPosix.OsMac;
 import com.faforever.client.os.OsPosix.OsLinux;
+import com.faforever.client.os.OsPosix.OsMac;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.SystemUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,11 +35,11 @@ public class OsConfiguration {
   @Bean
   @ConditionalOnMissingBean
   public OperatingSystem runtimeDetection() {
-    if (org.bridj.Platform.isWindows()) {
+    if (SystemUtils.IS_OS_WINDOWS) {
       return new OsWindows();
-    } else if (org.bridj.Platform.isLinux()) {
+    } else if (SystemUtils.IS_OS_LINUX) {
       return new OsLinux();
-    } else if (org.bridj.Platform.isMacOSX()) {
+    } else if (SystemUtils.IS_OS_MAC) {
       return new OsMac();
     } else {
       log.warn("Detected unsupported operating system. Feature may not work. Use on your own risk.");
